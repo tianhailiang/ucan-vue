@@ -10,6 +10,8 @@ var HtmlWebpackPlugin = require('html-webpack-plugin');
 
  var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
+var autoprefixer = require('autoprefixer');
+
 
  function resolve (dir) {
   return path.join(__dirname, '..', dir)
@@ -46,13 +48,20 @@ module.exports = function(env) {
               {
                   test: /\.css$/,
                   use: ExtractTextPlugin.extract({
-                    use: 'css-loader'
+                    use: [
+                           'css-loader'
+                        
+                      ]
                  })
               },
 
                 {
                     test: /\.vue$/,
-                    loader: 'vue-loader'
+                    loader: 'vue-loader',
+                     options: {
+                           // vue-loader options go here vue文件里css自动添加后缀
+                         postcss: [require('autoprefixer')({ browsers: ['last 10 Chrome versions', 'last 5 Firefox versions', 'Safari >= 6', 'ie > 8'] })]
+                      }
                     
                  },
 

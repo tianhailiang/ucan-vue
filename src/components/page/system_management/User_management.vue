@@ -1,13 +1,45 @@
 
 <style scoped>
+
 .content_box{
   position:absolute;
   left:200px;
-  top:107px;	
+  top:107px;
+  border:1px solid #dfe6ec;	
 }
 
+.top{
+  width:100%;
+  height:40px;
+  display: flex;
+  justify-content: flex-end;
 
+}
+
+.top_nav{
+  width:202px;
+  height:100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 	
+.top_nav span{
+  display: inline-block;
+  flex:1;
+  height:100%;
+  text-align:center;
+  line-height:40px;
+  
+
+
+}
+
+.active{
+  background:#e45f00;
+  color:#fff;
+}
+
 </style>
 
 <style type="text/css" media="screen">
@@ -39,44 +71,50 @@
     color: #fff;
 }
 
+.deleteAll{
+  color:#fff;
+  float: right;
+  margin-right:5px;
+  background:#f39801;
+}
 
 </style>
 
 <template>
  <div class="content_box">
 
-		<el-table
-    ref="multipleTable"
-    :data="tableData"
-    border
-   
-    style="width: 100%;"
-    @selection-change="handleSelectionChange">
-      <el-table-column
-        type="selection"
-        width="55" align="center">
-      </el-table-column>
+    <div class="top">
+      
+        <div class="top_nav" >
+          
+           <span class="active">管理员列表</span>
+           <span>添加管理员</span>
 
-      <el-table-column
-        label="用户名"
-        align="center" width="202" >
-        <template scope="scope">{{ scope.row.name }}</template>
-      </el-table-column>
+        </div> 
 
-    <el-table-column
-      label="登陆时间"
-      width="202" align="center">
-       <template scope="scope">{{ scope.row.date }}</template>
+    </div>
+    
+    
+        <el-table ref="multipleTable" :data="tableData" border tooltip-effect="dark" style="width: 100%" @selection-change="handleSelectionChange" >
+          <el-table-column type="selection" width="55" align="center" >
+          </el-table-column>
 
-    </el-table-column>
-     
-      <el-table-column
-        label="登陆IP"
-        show-overflow-tooltip width="202" align="center">
-         <template scope="scope">{{ scope.row.ip }}</template>
-      </el-table-column>
+          <el-table-column label="用户名" width="202" align="center">
+            <template scope="scope">{{ scope.row.name }}</template>
+          </el-table-column>
 
-      <el-table-column  label="操作" width="202" align="center">
+          <el-table-column  label="登陆时间" width="202" align="center">
+
+               <template scope="scope">{{ scope.row.date }}</template>
+
+          </el-table-column>
+          <el-table-column  label="登陆IP"  width="202" align="center">
+
+             <template scope="scope">{{ scope.row.ip }}</template>
+
+          </el-table-column>
+
+           <el-table-column  label="操作" width="202" align="center">
 
                 <template scope="scope">
                     <el-button size="small" @click="handleEdit(scope.$index, scope.row)">修改</el-button>
@@ -84,27 +122,27 @@
                       移除
                     </el-button>
                 </template>
-      </el-table-column>
+             </el-table-column>
 
-      <el-table-column
-      label="所属角色"
-      width="202" align="center">
-       <template scope="scope">{{ scope.row.role }}</template>
+             <el-table-column label="所属角色" width="202" align="center">
+                    <template scope="scope">{{ scope.row.role }}</template>
 
-      </el-table-column>
+              </el-table-column>  
 
 
-  </el-table>
+        </el-table>
 
-  <div style="margin-top: 20px">
-    <el-button @click="toggleSelection([tableData[1], tableData[2]])">切换第二、第三行的选中状态</el-button>
-    <el-button @click="toggleSelection()">取消选择</el-button>
-  </div>
+        <div style="margin-top: 20px">
+           
+            <el-button @click="deleteRowAll()" class="deleteAll">批量删除</el-button>
+        </div>
 
-  <div>
-    <ProgressBar :tot="total" v-on:handleCurrentChange="getPagedata"></ProgressBar>
 
-  </div>
+    <div>
+
+      <ProgressBar :tot="total" v-on:handleCurrentChange="getPagedata"></ProgressBar>
+
+    </div>
 
 </div>
 
@@ -169,26 +207,46 @@ import ProgressBar from '../progress_bar/Progress_bar';
 
       },
 
-      toggleSelection(rows) {
+      deleteRowAll() {
        
-        console.log(rows)
-        if (rows) {
-          rows.forEach(row => {
-            this.$refs.multipleTable.toggleRowSelection(row);
-          });
-        } else {
 
-          this.$refs.multipleTable.clearSelection();
-           console.log(this.multipleSelection)
-        }
+         if(this.multipleSelection.length==0){
+            
+            return; 
+
+         }else{
+
+
+             this.multipleSelection.forEach((val) => {
+                   
+                    this.tableData.forEach((row,index) =>{
+                       
+
+                         if(row.id==val.id){
+                            //判断是否相等
+                           
+                            console.log("true")
+                            this.tableData.splice(index,1)
+
+                         }
+
+                    });
+              });
+
+         }
+
+         
+         
+
       },
+
       handleSelectionChange(val) {
-        console.log(val)
-        this.multipleSelection = val;
-        console.log(this.multipleSelection)
+
+       this.multipleSelection =val;
+       
       },
 
-       deleteRow(index, rows) {
+      deleteRow(index, rows) {
           //删除
           rows.splice(index, 1);
       },
@@ -232,6 +290,6 @@ import ProgressBar from '../progress_bar/Progress_bar';
 
      }  
 
-
   }
+
 </script>
