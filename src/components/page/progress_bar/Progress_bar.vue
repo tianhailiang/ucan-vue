@@ -9,7 +9,7 @@
 
       <div class="block">
          
-          <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="currentPage1" :page-sizes="[10, 200, 300, 400]" :page-size="10" layout="total, sizes, prev, pager, next, jumper" :total="tot">
+          <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="currentPage1" :page-sizes="[10, 20, 300, 400]" :page-size="10" layout="total, sizes, prev, pager, next, jumper" :total="tot">
           </el-pagination>
            <span>共{{tot/10}}页</span>
       </div>
