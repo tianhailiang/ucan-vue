@@ -1,6 +1,6 @@
 # ucan项目后台管理界面
 
- author:thg
+ author:thl
 
  该项目依赖 webpack2 构建工具 + vue2 前端界面框架 + 饿了吗团队 基于vue element UI 后台管理桌面UI组件
 
