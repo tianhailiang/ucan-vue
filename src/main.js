@@ -9,7 +9,9 @@ require('element-ui/lib/theme-default/index.css')
 
 Vue.use(ElementUI)
 
-Vue.config.productionTip = false
+// Vue.config.productionTip = false
+
+Vue.config.productionTip = true
 
 /* eslint-disable no-new */
 new Vue({

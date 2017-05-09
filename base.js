@@ -24,7 +24,6 @@ module.exports = function(env) {
 
         entry: {
            
-            webpack_hot:'webpack/hot/only-dev-server',
             main: './main.js',
             vendor: 'moment'
           

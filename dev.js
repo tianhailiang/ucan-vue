@@ -13,7 +13,9 @@ module.exports = function (env) {
   return  webpackMerge(commonConfig(),{
 
   	        devtool: "cheap-eval-source-map",
-
+            entry:{
+                webpack_hot:'webpack/hot/only-dev-server'
+            },
   	        devServer: {
   	        	  hot: true,
       				  // contentBase: path.join(__dirname, "dist"),
@@ -25,7 +27,7 @@ module.exports = function (env) {
 
            plugins: [
                  new webpack.NamedModulesPlugin(),
-                  new webpack.HotModuleReplacementPlugin(),
+                 new webpack.HotModuleReplacementPlugin(),
 
                ]
             })

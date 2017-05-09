@@ -17,7 +17,6 @@ module.exports = function(env) {
             path: path.resolve(__dirname, 'dist_prod')
         },
 
-       
         plugins: [
            
              new webpack.HashedModuleIdsPlugin(),
@@ -26,19 +25,19 @@ module.exports = function(env) {
                 'process.env': {
                     'NODE_ENV': JSON.stringify('prod')
                 }
-            }),
-
-              new webpack.optimize.UglifyJsPlugin({
-                beautify: false,
-                mangle: {
-                    screw_ie8: true,
-                    keep_fnames: true
-                },
-                compress: {
-                    screw_ie8: true
-                },
-                comments: false
             })
+
+            //   new webpack.optimize.UglifyJsPlugin({
+            //     beautify: false,
+            //     mangle: {
+            //         screw_ie8: true,
+            //         keep_fnames: true
+            //     },
+            //     compress: {
+            //         screw_ie8: true
+            //     },
+            //     comments: false
+            // })
             
         ]
     })

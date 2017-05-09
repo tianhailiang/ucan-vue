@@ -246,30 +246,30 @@ var moment = require('moment');
     data() {
       return {
 
-        pickerOptions0: {
-          disabledDate(time) {
-            return time.getTime() < Date.now() - 8.64e7;
-          }
-        },
-
-        tableData:[],
-        multipleSelection: [],
-        total:0,
-        isActiveA:true,
-        isActiveB:false,
-        dialogFormVisible: false,
-        form: {
-          name:'',
-          account:'',
-          applicationDate:'',
-          phoneNumber:'',
-          userQQ:'',
-          state:''
-        },
-        type:'',
-        idx:'',
-        formLabelWidth: '80px'
-      }
+            pickerOptions0:{
+              disabledDate(time) {
+                return time.getTime() < Date.now() - 8.64e7;
+              }
+            },
+            type:'',
+            idx:'',
+            formLabelWidth: '80px',
+            tableData:[],
+            multipleSelection: [],
+            total:0,
+            isActiveA:true,
+            isActiveB:false,
+            dialogFormVisible:false,
+            form:{
+              name:'',
+              account:'',
+              applicationDate:'',
+              phoneNumber:'',
+              userQQ:'',
+              state:''
+            }
+            
+        }
 
     },
     created:function(){

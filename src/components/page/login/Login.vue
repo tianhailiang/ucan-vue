@@ -128,6 +128,7 @@
 
 import axios from 'axios'
 
+var qs = require('qs');
 
 export default {
   name: 'login',
@@ -194,20 +195,21 @@ export default {
        }
      
        var that = this;
-       //http://m.wishlist1314.com/wishlist_mobile/mobile/getBannerList
-       axios.get("http://localhost:9000/static/mock/login/login.json",{
+       // http://m.wishlist1314.com/wishlist_mobile/mobile/getBannerList
+       // http://localhost:9000/static/mock/login/login.json
          
-         params: {
+       
+       axios.get("http://localhost:9000/static/mock/login/login.json",{
 
-          "username":that.userName,
-          "password":that.password
-
-         }
-
+            params:{
+             "name":that.userName,
+            "pwd":that.password
+          }
+          
        })
 		  .then(function (response) {
 
-		      
+		      console.log(response)
           var result=response.data;
           
           if(result.code==0){
@@ -226,6 +228,7 @@ export default {
 		  .catch(function (error) {
 		      console.log(error);
 		  });
+
 
     }
   }
