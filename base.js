@@ -37,8 +37,8 @@ module.exports = function(env) {
          resolve: {
             extensions: ['.js', '.vue', '.json'],
             alias: {
-              'vue$': 'vue/dist/vue.esm.js',
-              '@': resolve('src')
+              'vue$': 'vue/dist/vue.common.js'
+             
             }
 
           },
@@ -69,19 +69,7 @@ module.exports = function(env) {
                     test: /\.js$/,
                     exclude: /(node_modules)/,
                     use: [{
-                      loader: 'babel-loader',
-                      options: {
-                        presets: [['es2015', {modules: false}],"react"],
-                        plugins:[
-                              'syntax-dynamic-import',
-                              'transform-async-to-generator',
-                              'transform-regenerator',
-                              'transform-runtime'
-                              
-                                // Enables React code to work with HMR.
-                            ]
-                      }
-
+                      loader: 'babel-loader'
                     }]
                 },
 

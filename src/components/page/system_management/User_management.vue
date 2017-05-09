@@ -240,9 +240,9 @@ import axios from 'axios';
 import ProgressBar from '../progress_bar/Progress_bar';
 
 var moment = require('moment');
-// console.log(moment('2016-09-18').format('YYYY-MM-DD'));
 
   export default {
+
     data() {
       return {
 

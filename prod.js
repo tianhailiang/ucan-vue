@@ -6,6 +6,8 @@ var path = require('path');
 
 var webpack = require('webpack');
 
+ var ExtractTextPlugin = require('extract-text-webpack-plugin');
+
 module.exports = function(env) {
       
 
@@ -14,9 +16,10 @@ module.exports = function(env) {
 
     	 output: {
             filename: '[name].[chunkhash].js',
-            path: path.resolve(__dirname, 'dist_prod')
+            path: path.resolve(__dirname, 'dist')
         },
 
+       
         plugins: [
            
              new webpack.HashedModuleIdsPlugin(),
@@ -25,19 +28,20 @@ module.exports = function(env) {
                 'process.env': {
                     'NODE_ENV': JSON.stringify('prod')
                 }
-            })
+            }),
 
-            //   new webpack.optimize.UglifyJsPlugin({
-            //     beautify: false,
-            //     mangle: {
-            //         screw_ie8: true,
-            //         keep_fnames: true
-            //     },
-            //     compress: {
-            //         screw_ie8: true
-            //     },
-            //     comments: false
-            // })
+              new webpack.optimize.UglifyJsPlugin({
+                beautify: false,
+                mangle: {
+                    except: ['$super', '$', 'exports', 'require']
+                },
+                compress: {
+                    screw_ie8: true
+                },
+                comments: false
+            }),
+
+            new ExtractTextPlugin("main.css")
             
         ]
     })
